@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Identify environment
         run: echo "This is ${{ matrix.environment }}"
-      - name: Special message for test
-        if: matrix.environment == 'test'
-        run: echo "Only the test copy runs this step"
+      - name: Special message for prod
+        if: matrix.environment == 'prod'
+        run: echo "Only the prod copy runs this step"
