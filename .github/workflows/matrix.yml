@@ -1,17 +1,35 @@
 name: 09 - Matrix
+
 on:
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   greet:
     strategy:
       matrix:
-        environment: [dev, test, prod]
+        environment: [dev, prod]
+
     runs-on: ubuntu-24.04
+
+    env:
+      MESSAGE: "Welcome to GitHub Actions"
+
     steps:
-      - name: Identify environment
+      - name: Print variable
+        run: echo "$MESSAGE"
+
+      - name: Print environment
         run: echo "This is ${{ matrix.environment }}"
-      - name: Special message for prod
-        if: matrix.environment == 'prod'
-        run: echo "Only the prod copy runs this step"
+
+      # IF condition
+      - name: If DEV
+        if: matrix.environment == 'dev'
+        run: echo "This is DEV environment"
+
+      # ELSE condition
+      - name: Else PROD
+        if: matrix.environment != 'dev'
+        run: echo "This is PROD environment"
