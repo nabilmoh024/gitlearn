@@ -1,0 +1,17 @@
+name: 09 - Matrix
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  greet:
+    strategy:
+      matrix:
+        environment: [dev, test, prod]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Identify environment
+        run: echo "This is ${{ matrix.environment }}"
+      - name: Special message for test
+        if: matrix.environment == 'test'
+        run: echo "Only the test copy runs this step"
